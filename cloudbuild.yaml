@@ -6,6 +6,7 @@ steps:
       - '-c'
       - |
         terraform init
+        terraform plan  -auto-approve
         terraform apply -auto-approve
 
   # Step 2: Build the Docker image
