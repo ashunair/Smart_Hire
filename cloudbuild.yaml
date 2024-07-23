@@ -39,3 +39,6 @@ steps:
 
 images:
   - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
