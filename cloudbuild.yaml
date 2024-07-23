@@ -6,7 +6,6 @@ steps:
       - '-c'
       - |
         terraform init
-        terraform plan -auto-approve
         terraform apply -auto-approve
 
   # Step 2: Build the Docker image
@@ -22,8 +21,6 @@ steps:
     args: ['deploy', 'apply', '--file=clouddeploy.yaml', '--region=us-central1']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=dev-target.yaml', '--region=us-central1']
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['deploy', 'apply', '--file=stage-target.yaml', '--region=us-central1']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=prod-target.yaml', '--region=us-central1']
 

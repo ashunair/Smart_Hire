@@ -19,21 +19,6 @@ resource "google_container_cluster" "dev_cluster" {
   }
 }
 
-# Define the stage cluster
-resource "google_container_cluster" "stage_cluster" {
-  name     = "stage-cluster"
-  location = var.zone
-
-  initial_node_count = 1
-
-  node_config {
-    machine_type = "e2-micro"
-
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform",
-    ]
-  }
-}
 
 # Define the prod cluster
 resource "google_container_cluster" "prod_cluster" {
