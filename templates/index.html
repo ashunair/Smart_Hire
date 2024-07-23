@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Home</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.jpg') }}" type="image/jpg">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
+   
+   
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+        .navbar {
+            padding: 1rem;
+            background-color: #1971c2;
+        }
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+        }
+        #masthead {
+            background: url('{{ url_for('static', filename='Home_page_1.svg')}}') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: rgb(198, 40, 40);
+            font-size: larger;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        #masthead h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-display: #26df73;
+        }
+        .mid-section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .mid-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        .lowsection {
+            background-color: #f9f9f9;
+        }
+        .jobcard {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+        }
+        .applybutton {
+            background-color: #1971c2;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .applybutton:hover {
+            background-color: #145a9e;
+        }
+        #footer {
+            background-color: #62bce5;
+            padding: 20px 0;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .footer-section {
+            margin: 10px;
+        }
+        .footer-section span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        .footer-section a {
+            margin: 0 10px;
+        }
+        .footer-section a img {
+            width: 30px;
+            height: 30px;
+        }
+        .footer-credit {
+            background-color: #1971c2;
+            padding: 15px 0;
+            color: white;
+            font-size: 25px;
+            font-weight: 300;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" height="100px" width="100px" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#why-us"><span>Why Us?</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#what-we-want"><span>What We Want</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#career-opportunities"><span>Careers</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('admin_login') }}">Admin</a>
+                            <a class="dropdown-item" href="{{ url_for('hr_login') }}">HR</a>
+                            <a class="dropdown-item" href="{{ url_for('candidate_login') }}">Candidate</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead -->
+    <header id="masthead" class="d-flex align-items-center">
+        <div class="container text-center">
+            <h1>Smart Hire Vision</h1>
+            <p>To build a dynamic and inclusive workforce that drives innovation, fosters growth, and sustains long-term success by leveraging advanced technologies, data-driven strategies, and a commitment to diversity and excellence.</p>
+        </div>
+    </header>
+    <!-- Midsection -->
+    <section id="why-us" class="mid-section">
+        <div class="container">
+            <h1>Why Us?</h1>
+            <p>At our company, we leverage cutting-edge technology to stay ahead in the industry, providing our employees with the tools they need to excel. We foster a culture of continuous learning and innovation, encouraging our team to explore new ideas and approaches. We are committed to creating a diverse and inclusive workplace where every voice is heard and valued. Our supportive environment fosters a sense of community and belonging, making everyone feel part of a close-knit team.</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="{{ url_for('static', filename='Home_page_2.svg') }}" alt="Why Us" class="img-fluid">
+                </div>
+                <div class="col-lg-4">
+                    <img src="{{ url_for('static', filename='Home_page_3.svg') }}" alt="Why Us" class="img-fluid">
+                </div>
+                <div class="col-lg-4">
+                    <img src="{{ url_for('static', filename='Home_page_4.svg') }}" alt="Why Us" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Career Section -->
+    <section id="what-we-want" class="mid-section lowsection">
+        <div class="container">
+            <h1>What We Want</h1>
+            <p>We seek individuals who are passionate about their work and driven by innovation. If you thrive on creativity and enjoy exploring new ideas, you’ll fit right in. Our industry is constantly evolving, and we need adaptable individuals who are eager to learn and grow. If you can quickly adapt to new challenges and stay ahead of industry trends, we want you on our team. We expect our employees to uphold the highest standards of integrity and professionalism. If you are honest, ethical, and committed to excellence in your work, we want you to join our team.</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="{{ url_for('static', filename='Home_page_4.svg') }}" alt="What We Want" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Ad -->
+    <section id="video-ad" class="mid-section">
+        <div class="container text-center">
+            <h1>What is SmartHire?</h1>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dAfU6YDgf8w?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <!-- Career Opportunities -->
+    <section id="career-opportunities" class="mid-section">
+        <div class="container">
+            <h1>Career Opportunities</h1>
+            <div class="row">
+                <div class="col-md-6 col-lg">
+                    <div class="jobcard">
+                        <h2>Software Engineer</h2>
+                        <p>Design, develop, and maintain software applications.</p>
+                        <a href="{{ url_for('job_billboard') }}" class="applybutton">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container footer-container">
+            <div class="footer-section">
+                <span>Kunal Patel</span>
+                <a href="https://github.com/Kunal080101"><img src="{{ url_for('static', filename='github.svg') }}" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/kunal-patel539/"><img src="{{ url_for('static', filename='linkedin.svg') }}" alt="LinkedIn"></a>
+                <a href="mailto:kunalpatel1928@gmail.com"><img src="{{ url_for('static', filename='email.svg') }}" alt="Email"></a>
+            </div>
+            <div class="footer-section">
+                <span>Sanika Sardesai</span>
+                <a href="https://github.com/sanikasardesai95"><img src="{{ url_for('static', filename='github.svg') }}" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/sanika-sardesai-548b49179/"><img src="{{ url_for('static', filename='linkedin.svg') }}" alt="LinkedIn"></a>
+                <a href="mailto:sanika.sardesai95@gmail.com"><img src="{{ url_for('static', filename='email.svg') }}" alt="Email"></a>
+            </div>
+            <div class="footer-section">
+                <span>Ashwathy Nair</span>
+                <a href="https://github.com/ashunair"><img src="{{ url_for('static', filename='github.svg') }}" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/ashwathy-nair98/"><img src="{{ url_for('static', filename='linkedin.svg') }}" alt="LinkedIn"></a>
+                <a href="mailto:ashwathynairofficial@gmail.com"><img src="{{ url_for('static', filename='email.svg') }}" alt="Email"></a>
+            </div>
+            <div class="footer-section">
+                <span>Faiza Mukhve</span>
+                <a href="https://github.com/faiza293/"><img src="{{ url_for('static', filename='github.svg') }}" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/faiza-mukve/"><img src="{{ url_for('static', filename='linkedin.svg') }}" alt="LinkedIn"></a>
+                <a href="mailto:fmukve@gmail.com"><img src="{{ url_for('static', filename='email.svg') }}" alt="Email"></a>
+            </div>
+            <div class="footer-section">
+                <span>Dhruv Mistry</span>
+                <a href="https://github.com/dhruv1007"><img src="{{ url_for('static', filename='github.svg') }}" alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/dhruvdmistry/"><img src="{{ url_for('static', filename='linkedin.svg') }}" alt="LinkedIn"></a>
+                <a href="mailto:dhruvdmistry07@gmail.com"><img src="{{ url_for('static', filename='email.svg') }}" alt="Email"></a>
+            </div>
+        </div>
+        <div class="footer-credit">
+            <span>Made with ❤ by team Blueprint</span>
+        </div>
+    </footer>
+</body>
+</html>
