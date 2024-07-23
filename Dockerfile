@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Ensure the environment variables are set
-COPY .env .
+COPY .env .env
 
 # Set the environment variable for Flask
 ENV FLASK_APP=app.py

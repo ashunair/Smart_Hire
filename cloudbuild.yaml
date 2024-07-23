@@ -38,5 +38,13 @@ steps:
 images:
   - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
 
+substitutions:
+  _PROJECT_ID: $PROJECT_ID
+  _SECRET_KEY: $GOOGLE_APPLICATION_CREDENTIALS
+  _DB_HOST: $DB_HOST
+  _DB_NAME: $DB_NAME
+  _DB_USER: $DB_USER
+  _DB_PASS: $DB_PASS
+
 options:
   logging: CLOUD_LOGGING_ONLY
