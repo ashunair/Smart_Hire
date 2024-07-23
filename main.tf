@@ -50,23 +50,3 @@ resource "google_container_cluster" "prod_cluster" {
     ]
   }
 }
-
-# Define IAM policy for Cloud Deploy pipeline editor
-resource "google_project_iam_member" "cloud_deploy_pipeline_editor" {
-  project = var.project_id
-  role    = "roles/clouddeploy.editor"
-  member  = "serviceAccount:${google_service_account.cloud_deploy_sa.email}"
-}
-
-# Define IAM policy for Cloud Deploy rollout permissions
-resource "google_project_iam_member" "cloud_deploy_rollout_permissions" {
-  project = var.project_id
-  role    = "roles/clouddeploy.jobRunner"
-  member  = "serviceAccount:${google_service_account.cloud_deploy_sa.email}"
-}
-
-# Define the service account for Cloud Deploy
-resource "google_service_account" "cloud_deploy_sa" {
-  account_id   = "cloud-deploy-sa"
-  display_name = "Cloud Deploy Service Account"
-}
