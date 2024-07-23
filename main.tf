@@ -19,7 +19,6 @@ resource "google_container_cluster" "dev_cluster" {
   }
 }
 
-
 # Define the prod cluster
 resource "google_container_cluster" "prod_cluster" {
   name     = "prod-cluster"
