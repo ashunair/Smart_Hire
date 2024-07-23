@@ -19,6 +19,8 @@
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f7f7f7;
+            background:url('{{ url_for('static', filename='back.jpg')}}') no-repeat;
+            background-size:cover;
             margin: 0;
             padding: 0;
         }
@@ -68,6 +70,7 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <h2>Job Roles</h2>
         <a href="{{ url_for('admin_dashboard') }}" class="btn btn-back">Back to Dashboard</a>
