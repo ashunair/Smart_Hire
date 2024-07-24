@@ -14,23 +14,22 @@ spec:
     spec:
       containers:
         - name: smart-hire
-          image: gcr.io/$_PROJECT_ID/smart_hire:latest
+          image: us-central1-docker.pkg.dev/$_PROJECT_ID/cicd-repo/cicd-demo-app:$SHORT_SHA
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: google-application-credentials
-                  key: $GOOGLE_APPLICATION_CREDENTIALS
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "my_key.json"
             - name: DB_HOST
-              value: $DB_HOST
+              value: "34.72.51.3"
             - name: DB_NAME
-              value: $DB_NAME
+              value: "postgres"
             - name: DB_USER
-              value: $DB_USER
+              value: "postgres"
             - name: DB_PASS
-              value: $DB_PASS
+              value: "Ashu123"
+            - name: SECRET_KEY
+              value: "your_secret_key"
 ---
 apiVersion: v1
 kind: Service
@@ -42,5 +41,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
   type: LoadBalancer

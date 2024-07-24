@@ -1,5 +1,4 @@
 steps:
-
   # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$_PROJECT_ID/smart_hire:latest', '.']
@@ -17,25 +16,19 @@ steps:
     args: ['deploy', 'apply', '--file=prod-target.yaml', '--region=us-central1']
 
   # Step 4: Deploy to Cloud Deploy pipeline
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-      'deploy', 'releases', 'create', 'smart-hire-release-$BUILD_ID',
-      '--project', '$_PROJECT_ID',
-      '--region', 'us-central1',
-      '--delivery-pipeline', 'smart-hire-pipeline',
-      '--images', 'smart_hire=gcr.io/$_PROJECT_ID/smart_hire:latest'
-    ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - >
+       gcloud deploy releases create release-$BUILD_ID
+       --delivery-pipeline=smart-hire-pipeline
+       --region=us-central1
+       --source=./
+       --images=smart_hire=us-central1-docker.pkg.dev/$_PROJECT_ID/cicd-repo/cicd-demo-app:$SHORT_SHA
 
 images:
   - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
-
-substitutions:
-  _PROJECT_ID: $PROJECT_ID
-  _SECRET_KEY: $GOOGLE_APPLICATION_CREDENTIALS
-  _DB_HOST: $DB_HOST
-  _DB_NAME: $DB_NAME
-  _DB_USER: $DB_USER
-  _DB_PASS: $DB_PASS
 
 options:
   logging: CLOUD_LOGGING_ONLY
