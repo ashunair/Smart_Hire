@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: smart-hire
-          image: us-central1-docker.pkg.dev/$_PROJECT_ID/cicd-repo/cicd-demo-app:$SHORT_SHA
+          image: smart_hire
           ports:
             - containerPort: 80
           env:

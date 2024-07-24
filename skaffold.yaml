@@ -4,7 +4,7 @@ metadata:
   name: smart-hire
 build:
   artifacts:
-    - image: gcr.io/$_PROJECT_ID/smart_hire:latest
+    - image: smart_hire
 deploy:
   kubectl:
     manifests:

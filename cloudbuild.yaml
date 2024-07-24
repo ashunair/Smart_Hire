@@ -25,7 +25,7 @@ steps:
        --delivery-pipeline=smart-hire-pipeline
        --region=us-central1
        --source=./
-       --images=smart_hire=us-central1-docker.pkg.dev/$_PROJECT_ID/cicd-repo/cicd-demo-app:$SHORT_SHA
+       --images=smart_hire=gcr.io/$_PROJECT_ID/smart_hire:latest
 
 images:
   - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
