@@ -5,7 +5,6 @@ steps:
     args:
       - '-c'
       - |
-        terraform destroy -auto-approve
         terraform init
         terraform plan  -auto-approve
         terraform apply -auto-approve

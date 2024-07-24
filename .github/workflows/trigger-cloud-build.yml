@@ -13,16 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.2.0
+      - name: Google Authenticate
+        id  : auth
+        uses: 'google-github-actions/auth@v2'
         with:
-          version: 'latest'
-
-      - name: Authenticate to Google Cloud
-        run: gcloud auth activate-service-account storageaccountgcp@regal-scholar-423322-h0.iam.gserviceaccount.com --key-file=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} --project=${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Submit Build
-        run: gcloud builds submit --config cloudbuild.yaml .
+        run: gcloud builds submit --config cloudbuild.yaml --substitutions _PROJECT_ID=${{ secrets.GCP_PROJECT_ID }},_SECRET_KEY=${{ secrets.SECRET_KEY }},_DB_HOST=${{ secrets.DB_HOST }},_DB_NAME=${{ secrets.DB_NAME }},_DB_USER=${{ secrets.DB_USER }},_DB_PASS=${{ secrets.DB_PASS }}
