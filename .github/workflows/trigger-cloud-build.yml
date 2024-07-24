@@ -22,7 +22,7 @@ jobs:
         run: echo "${{ secrets.GCP_KEY }}" > my_key.json
 
       - name: Authenticate to Google Cloud
-        run: gcloud auth activate-service-account --key-file=my_key.json
+        run: gcloud auth activate-service-account storageaccountgcp@regal-scholar-423322-h0.iam.gserviceaccount.com --key-file=my_key.json --project=${{ secrets.GCP_PROJECT_ID }}
 
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
