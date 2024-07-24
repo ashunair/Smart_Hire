@@ -19,7 +19,7 @@ jobs:
           version: 'latest'
 
       - name: Create .env file
-        run: echo "${{ secrets.GCP_KEY }}" > my_key.json
+        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > my_key.json
 
       - name: Authenticate to Google Cloud
         run: gcloud auth activate-service-account storageaccountgcp@regal-scholar-423322-h0.iam.gserviceaccount.com --key-file=my_key.json --project=${{ secrets.GCP_PROJECT_ID }}
