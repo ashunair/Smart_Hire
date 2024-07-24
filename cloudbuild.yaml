@@ -1,23 +1,14 @@
 steps:
-  # Step 1: Set up Terraform
-  - name: 'hashicorp/terraform:light'
-    entrypoint: 'sh'
-    args:
-      - '-c'
-      - |
-        terraform init
-        terraform plan  -auto-approve
-        terraform apply -auto-approve
 
-  # Step 2: Build the Docker image
+  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$_PROJECT_ID/smart_hire:latest', '.']
 
-  # Step 3: Push the Docker image to Google Container Registry
+  # Step 2: Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$_PROJECT_ID/smart_hire:latest']
 
-  # Step 4: Apply the Cloud Deploy configurations
+  # Step 3: Apply the Cloud Deploy configurations
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=clouddeploy.yaml', '--region=us-central1']
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -25,7 +16,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=prod-target.yaml', '--region=us-central1']
 
-  # Step 5: Deploy to Cloud Deploy pipeline
+  # Step 4: Deploy to Cloud Deploy pipeline
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [
       'deploy', 'releases', 'create', 'smart-hire-release-$BUILD_ID',
