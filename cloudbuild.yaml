@@ -7,7 +7,25 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$_PROJECT_ID/smart_hire:latest']
 
-  # Step 3: Apply the Cloud Deploy configurations
+ # Step 3: Download and configure SonarQube scanner for Linux
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        export SONAR_SCANNER_VERSION=6.0.0.4432
+        export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+        curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+        unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+        export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+        export SONAR_SCANNER_OPTS="-server"
+        sonar-scanner \
+          -Dsonar.projectKey=${_SONAR_PROJECT_KEY} \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=${_SONAR_HOST_URL} \
+          -Dsonar.login=${_SONAR_TOKEN}
+
+  # Step 4: Apply the Cloud Deploy configurations
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=clouddeploy.yaml', '--region=us-central1']
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -15,7 +33,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['deploy', 'apply', '--file=prod-target.yaml', '--region=us-central1']
 
-  # Step 4: Deploy to Cloud Deploy pipeline
+  # Step 5: Deploy to Cloud Deploy pipeline
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
@@ -29,6 +47,11 @@ steps:
 
 images:
   - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
+
+substitutions:
+  _SONAR_PROJECT_KEY: 'smart_hire'
+  _SONAR_HOST_URL: 'http://35.193.156.243:9000'
+  _SONAR_TOKEN: 'sqp_60c0c6dbc3a3ce1b897a3fe0623b58f5225b2827'
 
 options:
   logging: CLOUD_LOGGING_ONLY
