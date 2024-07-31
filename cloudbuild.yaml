@@ -1,11 +1,12 @@
 steps:
   # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$_PROJECT_ID/smart_hire:latest', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$_PROJECT_ID/smarthire:latest', '.']
+    
 
   # Step 2: Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$_PROJECT_ID/smart_hire:latest']
+    args: ['push', 'us-central1-docker.pkg.dev/$_PROJECT_ID/smarthire:latest']
 
 #  # Step 3: Download and configure SonarQube scanner for Linux
 #   - name: 'ubuntu'
@@ -43,10 +44,10 @@ steps:
        --delivery-pipeline=smart-hire-pipeline
        --region=us-central1
        --source=./
-       --images=smart_hire=gcr.io/$_PROJECT_ID/smart_hire:latest
+       --images=smarthire=us-central1-docker.pkg.dev/$_PROJECT_ID/smarthire:latest
 
 images:
-  - 'gcr.io/$_PROJECT_ID/smart_hire:latest'
+  - 'us-central1-docker.pkg.dev/$_PROJECT_ID/smarthire:latest'
 
 # substitutions:
 #   _SONAR_PROJECT_KEY: 'smart_hire'
