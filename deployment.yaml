@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: smart-hire
-        image: gcr.io/regal-scholar-423322-h0/smart_hire:latest
+        image: gcr.io/smarthirehub-429323/smart_hire:latest
         ports:
         - containerPort: 80
         env:
