@@ -23,4 +23,4 @@ ENV FLASK_APP=app.py
 EXPOSE 80
 
 # Run the application
-CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD ["flask", "run"]

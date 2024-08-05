@@ -21,13 +21,13 @@ spec:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: "my_key.json"
             - name: DB_HOST
-              value: "34.28.11.143"
+              value: "34.72.51.3"
             - name: DB_NAME
               value: "postgres"
             - name: DB_USER
               value: "postgres"
             - name: DB_PASS
-              value: "postgres"
+              value: "Ashu123"
             - name: SECRET_KEY
               value: "your_secret_key"
 ---
