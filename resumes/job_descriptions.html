@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Descriptions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="icon" href="{{ url_for('static', filename='Assets/Logo-wo Name.svg') }}" type="image/gif" sizes="16x16">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background:url('{{ url_for('static', filename='back.jpg')}}') no-repeat;
+            background-size:cover;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .job-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .job-card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Job Descriptions</h2>
+        {% for role in roles %}
+        <div class="job-card">
+            <h3>{{ role[1] }}</h3>
+            <p>{{ role[2] }}</p>
+            <a href="{{ url_for('job_billboard') }}" class="btn btn-primary">Apply Now</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

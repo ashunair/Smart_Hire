@@ -18,6 +18,8 @@ DB_PASS = os.getenv('DB_PASS')
 
 # Google Cloud Storage details
 GCP_BUCKET_NAME = os.getenv('GCP_BUCKET_NAME')
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
 
 # Connect to PostgreSQL
 def get_db_connection():
@@ -34,10 +36,21 @@ def upload_to_gcp(bucket_name, source_file_name, destination_blob_name):
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
-    blob.upload_from_filename(source_file_name)
+    try:
+        blob.upload_from_filename(source_file_name)
+        print(f"File {source_file_name} uploaded to {destination_blob_name}.")
+    except Exception as e:
+        print(f"Failed to upload file to GCP: {e}")
+        raise
+    
     return blob.public_url
-    print(f"File {source_file_name} uploaded to {destination_blob_name}.")
-    return f"gs://{bucket_name}/{destination_blob_name}"
+
+def list_bucket_contents():
+    storage_client = storage.Client()
+    blobs = storage_client.list_blobs(GCP_BUCKET_NAME)
+    
+    for blob in blobs:
+        print(blob.name)
 
 
 
@@ -100,22 +113,25 @@ def reject_application(id):
 
 @app.route('/add_job_role', methods=['GET', 'POST'])
 def add_job_role():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
-    
     if request.method == 'POST':
         role_name = request.form['role_name']
-        
+        description = request.form['description']
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO job_roles (role_name) VALUES (%s)', (role_name,))
+        cur.execute('INSERT INTO job_roles (role_name, description) VALUES (%s, %s)', (role_name, description))
         conn.commit()
         cur.close()
         conn.close()
-        
-        return redirect(url_for('admin_dashboard'))
-    
-    return render_template('add_job_role.html')
+        flash('Job role added successfully')
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM job_roles')
+    roles = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('add_job_role.html', roles=roles)
+
 
 @app.route('/logout')
 def logout():
@@ -143,7 +159,7 @@ def candidate_login():
         if candidate:
             session['candidate_logged_in'] = True
             session['candidate_id'] = candidate[0]
-            return redirect(url_for('job_billboard'))
+            return redirect(url_for('job_descriptions'))
         else:
             flash('Invalid credentials')
             return render_template('invalid_credentials.html')
@@ -210,6 +226,17 @@ def apply_job():
 
     flash('Your application has been submitted successfully.')
     return redirect(url_for('thank_you'))
+
+@app.route('/job_descriptions')
+def job_descriptions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM job_roles')
+    roles = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('job_descriptions.html', roles=roles)
+
 
 @app.route('/thank_you')
 def thank_you():
