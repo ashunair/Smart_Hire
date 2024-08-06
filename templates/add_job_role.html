@@ -4,23 +4,17 @@
     <meta charset="UTF-8">
     <title>Job Roles</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='Assets/Logo-wo Name.svg') }}" type="image/gif" sizes="16x16">
-    <!-- Custom CSS -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f7f7f7;
-            background:url('{{ url_for('static', filename='back.jpg')}}') no-repeat;
-            background-size:cover;
+            background: url('{{ url_for('static', filename='back.jpg')}}') no-repeat;
+            background-size: cover;
             margin: 0;
             padding: 0;
         }
@@ -70,14 +64,24 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <h2>Job Roles</h2>
         <a href="{{ url_for('admin_dashboard') }}" class="btn btn-back">Back to Dashboard</a>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
         <form action="{{ url_for('add_job_role') }}" method="POST" class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="role_name" class="sr-only">Role Name</label>
                 <input type="text" id="role_name" name="role_name" class="form-control" placeholder="Enter job role" required>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="description" class="sr-only">Job Description</label>
+                <textarea id="description" name="description" class="form-control" placeholder="Enter job description" required></textarea>
             </div>
             <button type="submit" class="btn btn-add-role mb-2">Add Role</button>
         </form>
@@ -86,6 +90,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Role Name</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,6 +98,7 @@
                 <tr>
                     <td>{{ role[0] }}</td>
                     <td>{{ role[1] }}</td>
+                    <td>{{ role[2] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
