@@ -4,7 +4,7 @@ metadata:
   name: smart-hire
 build:
   artifacts:
-    - image: smart_hire
+    - image: smarthire
 deploy:
   kubectl:
     manifests:

@@ -1,7 +1,7 @@
 variable "project_id" {
   description = "The GCP project ID"
   type        = string
-  default     = "regal-scholar-423322-h0"
+  default     = "smarthirehub-429323"
 }
 
 variable "region" {

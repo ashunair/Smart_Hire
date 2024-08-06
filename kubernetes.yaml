@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: smart-hire
-          image: smart_hire
+          image: smarthire
           ports:
             - containerPort: 80
           env:

@@ -4,5 +4,5 @@ metadata:
   name: prod
 description: Production environment
 gke:
-  cluster: projects/regal-scholar-423322-h0/locations/us-central1-a/clusters/prod-cluster
+  cluster: projects/smarthirehub-429323/locations/us-central1-a/clusters/prod-cluster
 requireApproval: true

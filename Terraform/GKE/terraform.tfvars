@@ -1,3 +1,3 @@
-project_id = "regal-scholar-423322-h0"
+project_id = "smarthirehub-429323"
 region     = "us-central1"
 zone       = "us-central1-a"
