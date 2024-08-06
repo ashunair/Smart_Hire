@@ -4,9 +4,15 @@ steps:
     args: ['build', '-t', 'us-central1-docker.pkg.dev/smarthirehub-429323/hiringsystem-repo/smarthire:$SHORT_SHA', '.']
     
   # Step 2: Run tests
-  - name: 'python'
+  - name: 'python:3.10'
     entrypoint: 'bash'
-    args: ['-c', 'pip install -r requirements.txt && pytest test_smart_hire.py']
+    args:
+      - '-c'
+      - |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+        pytest test_smart_hire.py
 
   # Step 2: Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
