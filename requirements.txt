@@ -26,3 +26,4 @@ requests
 rsa
 urllib3
 Werkzeug
+Pytest
